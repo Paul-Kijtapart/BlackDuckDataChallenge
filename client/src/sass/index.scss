@@ -1,0 +1,13 @@
+@import "normalize";
+@import "compass";
+@import "susy";
+@import "breakpoint";
+
+// Constants
+@import "./variables";
+
+// Change Susy Default Global Setting
+$susy: (columns: 12, gutters: 1 / 4, math: fluid, global-box-sizing: border-box);
+
+/* Makes border-box properties */
+@include border-box-sizing;
