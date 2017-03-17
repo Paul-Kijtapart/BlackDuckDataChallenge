@@ -1,0 +1,28 @@
+List of possible functionalities:
+1. List the top 10 projects that other projects depend on.
+
+2. List the top 10 projects that depend on many other projects.
+
+3. Find the most important projects by define your own metric - score.
+- score other than in and out degree.
+
+4. Find the strongly connected components (SCC) in an Open Source Graph?
+- What insights can be gained based on the number of SCC?
+
+5. What are the optimal ways to represent the multiple types of relationships? 
+- For instance, multiple types edges (having different meaning) between the pairs of vertices.
+
+6. Does the Six Degree of Separation [1] also hold in Open Source similarity graph? 
+- What’s the average distance between two random projects?
+
+
+Possible:
+1. find project with highest number of license dependencies
+- find project with lowest number of license dependencies
+
+2. find most important project
+Rank project on its 
+- Most Important project: 
+- Most Useless project : 
+- Order projects displayed by: PageRank (like google rank its result on search)
+	- Evaluate the quality and quantity of links a webpage to determine a relative score of that page's importance and authority on a 0 to 10 scale

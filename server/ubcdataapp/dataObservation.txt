@@ -1,0 +1,72 @@
+Possible Goals: 
+1. Check whether an open source project is under certain securitiy vulnerabilities.
+2. Check whether an open source project is violating any licence.
+
+DUE: March 20th at NOON (1 pm)
+
+SUBMIT BY link github would be easiest. Send to Jongrin Kim
+
+Marking Scheme:
+- finding interesting patterns 
+- finding interesting patterns 
+- Use some cool algorithm
+*HINT*
+- ask different questions such as “is there any better methods”
+- “Is this pattern intriguing?”
+- "How can I do better?”
+
+There are three columns:
+1. d_r_uuid = open source project id 
+- (unique - should be primary key)
+DataType: String
+
+The following 3 are d_r_uuid's instance variables.
+1.1 dws
+DataType: String
+
+1.2 dns
+DataType: String
+
+1.3 so
+DataType: String
+
+1.1 & 1.2 & 1.3 => some sort of different features/representation that’s in the open source project id
+
+The other 2 columns:
+2. version
+- the security version that’s used in the particular project
+- important because you want to make sure which version a project is using 
+	- to check if the version is under certain security vulnerabilities or not
+DataType: String
+
+3. license_id
+- id of open source license the project complies under
+*HINT*
+- fewer license a project uses for each project, better it is since there is lower chance of violating that license) 
+DataType: Integer (Not sure if it can exceed 2^31)
+
+
+Observation:
+1. Project and its properties:
+- The Id of each project is unique (Primary Key)
+- Two rows with different d_r_uuid can have the same set of properties.
+	- Not sure what can be made of the 3 properties yet.
+- A projet can have many properties.
+
+2. Project and Version
+- Version helps map the open source project to proper security check
+- *KEY* Each project can be assigned to at MOST one version (Attribute)
+
+3. Project and license_id
+- Each project with same properties and same version can depend (assgin) to multiple license_id
+- license_id indicates the list of license this project has to satisfy.
+- Multiple rows with exact same id, properties, and version can have different license_id
+
+Duplicate values that can appear in project with different ids:
+- version
+- license_id
+
+Sanitization:
+- need to remove duplicate row 
+	- two rows are considered the same, when all its columns match
+
