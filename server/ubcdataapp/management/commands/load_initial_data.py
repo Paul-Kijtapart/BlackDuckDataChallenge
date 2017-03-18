@@ -21,7 +21,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         with open(SAMPLE_DATA_PATH, "r") as csvfile:
-            lines = csv.reader(csvfile, delimiter=';', quotechar='"')
-            for line_count in range(5):
-                print(lines.__next__())
+            lines = csv.DictReader(csvfile, delimiter=';', quotechar='"')
+            for line in lines:
+                print(line["d_r_uuid"], line["dws"], line["dns"], line["so"], line["version"], line["license_id"])
         self.stdout.write("Successfully Load initial data to PostgreSQL database.")
