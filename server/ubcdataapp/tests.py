@@ -20,6 +20,10 @@ class VersionTestCase(TestCase):
         self.assertEqual(Version.objects.count()
                          , 3
                          , "duplicate with same primary key doesn't get re-add")
+        Version.objects.get_or_create(pk="v4")
+        self.assertEqual(Version.objects.count(), 4,
+                         "Insert duplicate wont get add "
+                         "and No Error thrown")
         with self.assertRaises(IntegrityError):
             Version.objects.create(name="v1")
 
@@ -34,8 +38,12 @@ class LicenseTestCase(TestCase):
         self.assertEqual(License.objects.count()
                          , 3
                          , "duplicate with same pk does NOT get re-add")
+        License.objects.get_or_create(pk=-1)
+        self.assertEqual(License.objects.count(), 3,
+                         "Insert duplicate wont get add "
+                         "and No Error thrown")
         with self.assertRaises(IntegrityError):
-            License.objects.create(pk="50")
+            License.objects.create(pk=50)
 
 
 class DWSTestCase(TestCase):
@@ -48,6 +56,11 @@ class DWSTestCase(TestCase):
         self.assertEqual(DWS.objects.count()
                          , 3
                          , "duplicate with same pk does NOT get re-add")
+        DWS.objects.get_or_create(pk="dws2")
+        self.assertEqual(DWS.objects.count(), 3,
+                         "Insert duplicate wont get add "
+                         "and No Error thrown")
+
         with self.assertRaises(IntegrityError):
             DWS.objects.create(value="dw3")
 
@@ -62,6 +75,10 @@ class DNSTestCase(TestCase):
         self.assertEqual(DNS.objects.count()
                          , 3
                          , "duplicate with same pk does NOT get re-add")
+        DNS.objects.get_or_create(pk="dns2")
+        self.assertEqual(DNS.objects.count(), 3,
+                         "Insert duplicate wont get add "
+                         "and No Error thrown")
         with self.assertRaises(IntegrityError):
             DNS.objects.create(value="dns3")
 
@@ -76,6 +93,10 @@ class SOTestCase(TestCase):
         self.assertEqual(SO.objects.count()
                          , 3
                          , "duplicate with same pk does NOT get re-add")
+        SO.objects.get_or_create(pk="so3")
+        self.assertEqual(SO.objects.count(), 3,
+                         "Insert duplicate wont get add "
+                         "and No Error thrown")
         with self.assertRaises(IntegrityError):
             SO.objects.create(pk="so2")
 
@@ -154,6 +175,3 @@ class ProjectTestCase(TestCase):
         self.assertEqual(self.p1.so.count(), 3)
         self.assertEqual(self.p2.so.count(), 2)
         self.assertEqual(self.p3.so.count(), 1)
-
-
-
