@@ -3,34 +3,52 @@ from __future__ import unicode_literals
 from django.db import models
 
 
-# TODO: Create your models here.
-
 class Version(models.Model):
-    name = models.CharField  # TODO: max-len maybe
-    pass
+    name = models.TextField(primary_key=True)
+
+    def __str__(self):
+        return "name : %s " % (self.name)
 
 
 class License(models.Model):
-    pass
+    id = models.IntegerField(primary_key=True)
+
+    def __str__(self):
+        return "id : %d " % self.id
 
 
-class Dependency(models.Model):
-    license = models.ForeignKey(License, on_delete=models.CASCADE)
-    pass
+class DWS(models.Model):
+    value = models.TextField(primary_key=True)
+
+    def __str__(self):
+        return "value : %s " % (self.value)
+
+
+class DNS(models.Model):
+    value = models.TextField(primary_key=True)
+
+    def __str__(self):
+        return "value : %s " % (self.value)
+
+
+class SO(models.Model):
+    value = models.TextField(primary_key=True)
+
+    def __str__(self):
+        return "value : %s " % (self.value)
 
 
 class Project(models.Model):
+    id = models.TextField(primary_key=True)
     version = models.ForeignKey(Version, on_delete=models.CASCADE)
-    pass
 
+    license = models.ManyToManyField(License)
+    dws = models.ManyToManyField(DWS)
+    dns = models.ManyToManyField(DNS)
+    so = models.ManyToManyField(SO)
 
-class Project_DWS(models.Model):
-    pass
+    def __str__(self):
+        return "id = %s " % (self.id)
 
-
-class Project_DNS(models.Model):
-    pass
-
-
-class Project_SO(models.Model):
-    pass
+    class Meta:
+        ordering = ("id",)

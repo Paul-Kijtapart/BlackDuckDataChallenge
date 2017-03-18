@@ -1,6 +1,8 @@
 # Secret Config
 
 secret_config.py
+__pycache__
+*.pyc
 server/db.sqlite3
 
 # Created by https://www.gitignore.io/api/pycharm

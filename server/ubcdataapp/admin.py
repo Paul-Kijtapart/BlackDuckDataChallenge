@@ -1,8 +1,12 @@
 from django.contrib import admin
 
-# Register your models here.
+# models
+from ubcdataapp.models import Version
+from ubcdataapp.models import License
+from ubcdataapp.models import Project
+from ubcdataapp.models import DNS
+from ubcdataapp.models import DWS
+from ubcdataapp.models import SO
 
-from .models import Version
-from .models import License
 
-admin.site.register(Version, License)
+admin.site.register(Version, License, Project, DNS, DWS, SO)
