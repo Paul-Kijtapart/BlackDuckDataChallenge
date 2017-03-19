@@ -103,75 +103,84 @@ class SOTestCase(TestCase):
 
 # Create your tests here.
 class ProjectTestCase(TestCase):
-    def setUp(self):
+    @classmethod
+    def setUpTestData(cls):
         # Set up distinct versions
-        self.v1 = Version.objects.create(name="v1")
-        self.v2 = Version.objects.create(name="v2")
-        self.v3 = Version.objects.create(pk="v3")
+        cls.v1 = Version.objects.create(name="v1")
+        cls.v2 = Version.objects.create(name="v2")
+        cls.v3 = Version.objects.create(pk="v3")
 
         # Set up distinct license
-        self.l1 = License.objects.create(id="30")
-        self.l2 = License.objects.create(pk="50")
-        self.l3 = License.objects.create(pk="-1")
+        cls.l1 = License.objects.create(id="30")
+        cls.l2 = License.objects.create(pk="50")
+        cls.l3 = License.objects.create(pk="-1")
 
         # Set up Project's properties
-        self.dws1 = DWS.objects.create(pk="dws1")
-        self.dws2 = DWS.objects.create(pk="dws2")
-        self.dws3 = DWS.objects.create(pk="dws3")
+        cls.dws1 = DWS.objects.create(pk="dws1")
+        cls.dws2 = DWS.objects.create(pk="dws2")
+        cls.dws3 = DWS.objects.create(pk="dws3")
 
-        self.dns1 = DNS.objects.create(pk="dns1")
-        self.dns2 = DNS.objects.create(pk="dns2")
-        self.dns3 = DNS.objects.create(pk="dns3")
+        cls.dns1 = DNS.objects.create(pk="dns1")
+        cls.dns2 = DNS.objects.create(pk="dns2")
+        cls.dns3 = DNS.objects.create(pk="dns3")
 
-        self.so1 = SO.objects.create(pk="so1")
-        self.so2 = SO.objects.create(pk="so2")
-        self.so3 = SO.objects.create(pk="so3")
+        cls.so1 = SO.objects.create(pk="so1")
+        cls.so2 = SO.objects.create(pk="so2")
+        cls.so3 = SO.objects.create(pk="so3")
 
         # Set up distinct projects with Version
-        self.p1 = Project.objects.create(id="p1",
-                                         version=self.v1)
+        cls.p1 = Project.objects.create(id="p1",
+                                         version=cls.v1)
 
-        self.p2 = Project.objects.create(pk="p2",
-                                         version=self.v2)
+        cls.p2 = Project.objects.create(pk="p2",
+                                         version=cls.v2)
 
-        self.p3 = Project.objects.create(pk="p3",
-                                         version=self.v3)
+        cls.p3 = Project.objects.create(pk="p3",
+                                         version=cls.v3)
 
-    def test_many_to_one_version(self):
+        # Sync Project with License
+        cls.p1.license.add(cls.l1, cls.l2, cls.l3)
+        cls.p2.license.add(cls.l2, cls.l3)
+        cls.p3.license.add(cls.l3)
+
+        # Sync Project with its properties
+        cls.p1.dws.add(cls.dws1, cls.dws2, cls.dws3)
+        cls.p2.dws.add(cls.dws2, cls.dws3)
+        cls.p3.dws.add(cls.dws3)
+
+        cls.p1.dns.add(cls.dns1, cls.dns2, cls.dns3)
+        cls.p2.dns.add(cls.dns2, cls.dns3)
+        cls.p3.dns.add(cls.dns3)
+
+        cls.p1.so.add(cls.so1, cls.so2, cls.so3)
+        cls.p2.so.add(cls.so2, cls.so3)
+        cls.p3.so.add(cls.so3)
+
+    def test_sync_version(self):
         self.assertIn(self.p1, self.v1.project_set.all())
         self.assertIn(self.p2, self.v2.project_set.all())
         self.assertIn(self.p3, self.v3.project_set.all())
 
-    def test_many_to_many_license(self):
-        self.p1.license.add(self.l1, self.l2, self.l3)
-        self.p2.license.add(self.l2, self.l3)
-        self.p3.license.add(self.l3)
+    def test_sync_license(self):
+        self.assertEqual(self.p1.get_license_count(), 3)
+        self.assertEqual(self.p2.get_license_count(), 2)
+        self.assertEqual(self.p3.get_license_count(), 1)
+
         with self.assertRaises(IntegrityError):
             self.p2.license.add(self.l2)
 
-    def test_many_to_many_dws(self):
-        self.p1.dws.add(self.dws1, self.dws2, self.dws3)
-        self.p2.dws.add(self.dws2, self.dws3)
-        self.p3.dws.add(self.dws3)
+    def test_sync_dws(self):
+        self.assertEqual(self.p1.get_dws_count(), 3)
+        self.assertEqual(self.p2.get_dws_count(), 2)
+        self.assertEqual(self.p3.get_dws_count(), 1)
 
-        self.assertEqual(self.p1.dws.count(), 3)
-        self.assertEqual(self.p2.dws.count(), 2)
-        self.assertEqual(self.p3.dws.count(), 1)
-
-    def test_many_to_many_dns(self):
-        self.p1.dns.add(self.dns1, self.dns2, self.dns3)
-        self.p2.dns.add(self.dns2, self.dns3)
-        self.p3.dns.add(self.dns3)
-
+    def test_sync_dns(self):
         self.assertEqual(self.p1.dns.count(), 3)
         self.assertEqual(self.p2.dns.count(), 2)
         self.assertEqual(self.p3.dns.count(), 1)
 
-    def test_many_to_many_so(self):
-        self.p1.so.add(self.so1, self.so2, self.so3)
-        self.p2.so.add(self.so2, self.so3)
-        self.p3.so.add(self.so3)
-
+    def test_sync_so(self):
         self.assertEqual(self.p1.so.count(), 3)
         self.assertEqual(self.p2.so.count(), 2)
         self.assertEqual(self.p3.so.count(), 1)
+

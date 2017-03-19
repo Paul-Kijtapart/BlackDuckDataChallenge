@@ -48,7 +48,13 @@ class Project(models.Model):
     so = models.ManyToManyField(SO)
 
     def __str__(self):
-        return "id = %s " % (self.id)
+        return "id : %s" % (self.id)
+
+    def get_license_count(self):
+        return self.license.count()
+
+    def get_dws_count(self):
+        return self.dws.count()
 
     class Meta:
         ordering = ("id",)

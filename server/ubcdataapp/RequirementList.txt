@@ -1,0 +1,10 @@
+Insights on License:
+1. Find the licence that is used by most projects. (# of arrows going out)
+
+Insights on Version:
+1. Find the version that is used by most projects (# of arrows going out)
+
+2. Find the Similarity between two projects
+2.1 that have the same DNS, DWS, SO
+2.2 that have the same Version, License
+

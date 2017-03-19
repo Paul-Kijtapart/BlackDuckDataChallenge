@@ -20,47 +20,7 @@ from ubcdataapp.models import SO
 class Command(BaseCommand):
     help = 'Load Initial CSV data to PostgreSQL database'
 
-    def add_version(self, version_name):
-        '''
-        Create Version with version_name if Not Exist
-        :param version_name: TextField
-        :return: void
-        '''
-        Version.objects.get_or_create(pk=version_name)
-
-    def add_license(self, license_id):
-        '''
-        Create License with license_id if Not Exist
-        :param license_id: IntegerField
-        :return: void
-        '''
-        License.objects.get_or_create(pk=int(license_id))
-
-    def add_dws(self, dws_value):
-        '''
-        Create DWS with dws_value if Not Exist
-        :param dws_value: TextField
-        :return: void
-        '''
-        DWS.objects.get_or_create(pk=dws_value)
-
-    def add_dns(self, dns_value):
-        '''
-        Create DNS with dns_value if Not Exist
-        :param dns_value: TextField
-        :return: void
-        '''
-        DNS.objects.get_or_create(pk=dns_value)
-
-    def add_so(self, so_value):
-        '''
-        Create SO with so_value if Not Exist
-        :param so_value: TextField
-        :return: void
-        '''
-        SO.objects.get_or_create(pk=so_value)
-
-    def add_project(self, project_id,
+    def load_row(self, project_id,
                     dws_value, dns_value, so_value,
                     version_name,
                     license_id):
@@ -107,14 +67,10 @@ class Command(BaseCommand):
                 count += 1
                 print("Given Row : " +
                       line["d_r_uuid"], line["dws"], line["dns"], line["so"], line["version"], line["license_id"])
-                self.add_version(line["version"])
-                self.add_license(line["license_id"])
-                self.add_dws(line["dws"])
-                self.add_dns(line["dns"])
-                self.add_so(line["so"])
-                self.add_project(line["d_r_uuid"],
+
+                self.load_row(line["d_r_uuid"],
                                  line["dws"], line["dns"], line["so"],
                                  line["version"], line["license_id"])
                 print("")
 
-        self.stdout.write("Successfully Load initial data to PostgreSQL database.")
+        self.stdout.write("Successfully Load initial data to PostgreSQL database.", ending="\n\n")
