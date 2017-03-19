@@ -38,6 +38,7 @@ class Command(BaseCommand):
         '''
         assigned_version, created = Version.objects.get_or_create(pk=version_name)
         project, created = Project.objects.get_or_create(pk=project_id, version=assigned_version)
+        print("Version: " + assigned_version.name)
         print("Check M2O version : " + str(assigned_version.project_set.all()))
 
         dws, created = DWS.objects.get_or_create(pk=dws_value)
@@ -62,9 +63,9 @@ class Command(BaseCommand):
             lines = csv.DictReader(csvfile, delimiter=';', quotechar='"')
             count = 0
             for line in lines:
-                if (count == 15):
-                    break
-                count += 1
+                # if (count == 15):
+                #     break
+                # count += 1
                 print("Given Row : " +
                       line["d_r_uuid"], line["dws"], line["dns"], line["so"], line["version"], line["license_id"])
 
