@@ -63,9 +63,9 @@ class Command(BaseCommand):
             lines = csv.DictReader(csvfile, delimiter=';', quotechar='"')
             count = 0
             for line in lines:
-                # if (count == 15):
-                #     break
-                # count += 1
+                if (count == 20):
+                    break
+                count += 1
                 print("Given Row : " +
                       line["d_r_uuid"], line["dws"], line["dns"], line["so"], line["version"], line["license_id"])
 
