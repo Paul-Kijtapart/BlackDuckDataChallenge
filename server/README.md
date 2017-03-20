@@ -10,7 +10,7 @@ postgres -D /usr/local/var/postgres
 psql
 ```
 
-2 Install psycopg2
+2. Install psycopg2
 ```
 pip install psycopg2
 ```
@@ -43,7 +43,7 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-5.1 Load initial data
+6. Load initial data
 ```
 python manage.py load_initial_data
 python manage.py display_initial_data
