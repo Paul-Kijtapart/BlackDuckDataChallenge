@@ -4,6 +4,7 @@ secret_config.py
 __pycache__
 *.pyc
 server/db.sqlite3
+ubcdataapp/cached_data/*
 
 # Created by https://www.gitignore.io/api/pycharm
 

@@ -8,3 +8,6 @@ Insights on Version:
 2.1 that have the same DNS, DWS, SO
 2.2 that have the same Version, License
 
+
+1, 2 => View1 (center node)
+3 => Tree with sublist

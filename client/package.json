@@ -12,8 +12,11 @@
   "dependencies": {
     "d3": "^4.7.3",
     "jquery": "^3.2.0",
+    "radium": "^0.18.2",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-digraph": "^1.0.9",
+    "react-dom": "^15.4.2",
+    "react-icons": "^2.2.3"
   },
   "devDependencies": {
     "babel-core": "^6.24.0",

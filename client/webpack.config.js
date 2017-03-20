@@ -11,6 +11,7 @@ module.exports = {
     filename: 'index.js',
     path: PUBLIC
   },
+  watch: true,
   module: {
     rules: [{
       test: /\.jsx?$/,
@@ -27,6 +28,7 @@ module.exports = {
   },
   resolve: {
     modules: [
+      path.join(SRC, "mockData"),
       SRC,
       NODE_MODULES
     ]

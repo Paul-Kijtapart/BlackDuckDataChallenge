@@ -16,10 +16,24 @@ def get_version_used_by_most_projects_querySet(limit=None):
     return res if not limit else res[:limit]
 
 
+def get_version_and_its_project_count_list(limit=None):
+    res = Project.objects.values('version') \
+        .annotate(num_project=Count("id")) \
+        .order_by("-num_project")
+    return res if not limit else res[:limit]
+
+
 def get_license_used_by_most_projects_querySet(limit=None):
     res = License.objects \
         .annotate(num_projects=Count("project", distinct=True)) \
         .order_by("-num_projects")
+    return res if not limit else res[:limit]
+
+
+def get_license_and_its_project_count_list(limit=None):
+    res = License.objects\
+        .annotate(num_project=Count("project__id")) \
+        .order_by("-num_project")
     return res if not limit else res[:limit]
 
 
