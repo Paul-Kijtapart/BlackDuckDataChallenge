@@ -1,4 +1,6 @@
-Set up PostgreSQL Database:
+# Server
+
+### Set up PostgreSQL Database:
 
 1. Install PostgreSQL
 brew update
@@ -31,13 +33,13 @@ DATABASES = {
 python manage.py makemigrations
 python manage.py migrate
 
-// TODO: need to set up load command
+
 5.1 Load initial data
-python manage.py <filename>
+python manage.py load_initial_data
+python manage.py display_initial_data
 
 6. Perform Migration to let Django to set up environment
 python manage.py migrate
 
-
-Run Locally
+## Run Locally
 python manage.py runserver
