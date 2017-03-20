@@ -71,3 +71,5 @@ This projects aims to help people understand the dependencies of a open source p
  "'num_project': 2}, {'id': 21, 'num_project': 1}, {'id': 364, 'num_project': "
  "1}, {'id': 29, 'num_project': 1}, '...(remaining elements truncated)...']>"
  ```
+ 
+ ### You can download the Report.txt file in Server folder
