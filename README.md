@@ -72,4 +72,4 @@ This projects aims to help people understand the dependencies of a open source p
  "1}, {'id': 29, 'num_project': 1}, '...(remaining elements truncated)...']>"
  ```
  
- ### You can download the Report.txt file in Server folder
+ ### You can download the [Report.txt](https://github.com/Paul-Kijtapart/BlackDuckDataChallenge/blob/master/server/report.txt) file in Server folder
