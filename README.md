@@ -73,3 +73,4 @@ This projects aims to help people understand the dependencies of a open source p
  ```
  
  ### You can download the [Report.txt](https://github.com/Paul-Kijtapart/BlackDuckDataChallenge/blob/master/server/report.txt) file in Server folder
+ ### Insights deduced from [sample.csv](https://github.com/Paul-Kijtapart/BlackDuckDataChallenge/tree/master/server/ubcdataapp/original_data)
